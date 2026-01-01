@@ -1,0 +1,22 @@
+// in this question handle the 3 cases
+// a) Considering all the values are 9.
+// b) Considering the last digit is not 9.
+// c) Considering the last digit is 9.
+
+
+class Solution {
+    public int[] plusOne(int[] nums) {
+        int n = nums.length;
+
+        for (int i=n-1;i>=0;i--){
+            if (nums[i]==9) nums[i]=0;
+            else {
+                nums[i]++;
+                return nums;
+            }
+        }
+        int result [] = new int [n+1];
+        result[0]=1;
+        return result;
+    }
+}
