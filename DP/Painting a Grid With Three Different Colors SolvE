@@ -1,0 +1,60 @@
+
+
+
+class Solution {
+
+    private List<String> poss = new ArrayList<>();
+    private final int MOD = 1000000007;
+
+    public void generate (String currentstate, int l , char prevclr){
+        if (l == 0) {
+            poss.add(currentstate) ;
+            return ;
+        }
+        char arr [] = {'R', 'G', 'B'};
+        for (char ch : arr){
+            if (ch == prevclr) continue;
+            generate(currentstate+ch, l-1, ch);
+        }
+    }
+
+    public int solve (int remcol, int previndex, int dp[][]){
+
+        if (remcol==0) return 1;
+
+        if (dp[remcol][previndex] != -1) return dp[remcol][previndex];
+        String prevstate = poss.get(previndex);
+        int ways =0;
+        for (int i=0;i<poss.size();i++){
+            if(previndex == i) continue;
+            String currentstate = poss.get(i);
+            boolean flag = true;
+            for (int j=0;j<currentstate.length();j++){
+                if(currentstate.charAt(j) == prevstate.charAt(j)){
+                    flag = false;
+                    break;
+                }
+            }
+
+            if(flag){
+                ways = (ways + solve (remcol-1, i,dp)) % MOD;
+            }
+        }
+         return dp[remcol][previndex] = ways;
+    }
+    public int colorTheGrid(int m, int n) {
+        generate("",m, '*');
+        int size = poss.size();
+        int dp[][] = new int [n][size];
+        for (int i=0;i<n;i++){
+            for (int j=0;j<size;j++){
+                dp[i][j]=-1;
+            }
+        }
+        int result =0;
+        for (int i=0;i<size;i++){
+            result = (result + solve(n-1,i,dp))% MOD;
+        }
+        return result;
+    }
+}
