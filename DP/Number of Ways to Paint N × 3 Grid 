@@ -1,0 +1,65 @@
+
+
+
+
+class Solution {
+    private final int MOD = 1000000007;
+    List<String> poss = new ArrayList<>();
+
+    public void generate (String currString, int m , char prevchar){
+        if(m==0){
+            poss.add(currString);
+            return;
+        }
+        char arr [] = {'R','Y','G'};
+        for (char ch : arr){
+            if (ch == prevchar) continue;
+            generate (currString+ch, m-1,ch);
+        }
+    }
+
+        public int helper (int remrow, int previndex, int dp[][]){
+            if (remrow ==0) {
+                return 1;
+            }
+            if (dp[remrow][previndex] !=-1) return dp[remrow][previndex];
+
+            String prevstate = poss.get(previndex);
+            int ways =0;
+            for (int i=0;i<poss.size();i++){
+                if (i==previndex) continue;
+                String currstate = poss.get(i);
+                boolean flag = true;
+                for (int j=0;j<currstate.length();j++){
+                    if (prevstate.charAt(j)==currstate.charAt(j)){
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag){
+                    ways = (ways + helper(remrow-1, i,dp)) %MOD;
+                }
+
+            }
+         return dp[remrow][previndex]= ways;
+
+        }
+    
+    public int numOfWays(int n) {
+        generate ("", 3, '*');
+
+        int size = poss.size();
+        int dp [][] = new int [n][size];
+
+        for (int i=0;i<n;i++){
+            for (int j=0;j<size;j++){
+                dp[i][j]=-1;
+            }
+        }
+        long result=0;
+        for (int i=0;i<size;i++){
+            result = (result + helper (n-1,i,dp))%MOD;
+        }
+        return (int)result;
+    }
+}
