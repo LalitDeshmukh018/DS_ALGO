@@ -1,0 +1,35 @@
+// HERE THE MAIN THING TO KEEP IN MIND 
+// PRECALCULATE THE POWER 
+// AS HERE ARE SOME OF THE COMBIANTION WE ARE USING THE POWER OF 2
+// 
+
+
+
+class Solution {
+    public int numSubseq(int[] nums, int target) {
+        int MOD = 1000000007;
+        int n = nums.length;
+        int ans = 0;
+        Arrays.sort(nums);
+        int pow [] = new int [n];
+
+
+        pow[0] =1;
+        for (int i=1;i<n;i++){
+            pow[i] = (pow[i-1] *2) % MOD; 
+        }
+        int i=0;
+        int j = n-1;
+
+        while (i<=j){
+            int sum = nums[i] + nums[j];
+
+            if (sum<=target) {
+                ans = (ans + pow [j-i]) % MOD;
+                i++;
+            }
+            else j--;
+        }
+        return ans ;
+    }
+}
