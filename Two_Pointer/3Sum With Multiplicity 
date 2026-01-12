@@ -1,4 +1,4 @@
-// here for similar number we can used the combination formual that is nCr
+// here for similar number we can used the combination formual that is nCr e.g 1 1 2 2 2 2 here n ==4 ie length and r =2
 //simply this formula and then will get the combination
 // check how we are increaskg the count and the duplicate occur 
 // make the product of the 2 count variable to get it
