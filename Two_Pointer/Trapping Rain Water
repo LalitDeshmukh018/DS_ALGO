@@ -1,0 +1,31 @@
+// here we keep the track of leftmax and right max
+// update the pointer are per the smaller because of the water get trapperd between smaller building
+
+
+
+
+
+class Solution {
+    public int trap(int[] nums) {
+        int n = nums.length;
+        int i=0;
+        int j =n-1;
+        int count= 0;
+        int left= 0;
+        int right = 0;
+
+        while(i<j){
+             if (nums[i]<= nums[j]){
+                if(left>nums[i]) count += left-nums[i];
+                else left = nums[i];
+                i++;
+             }
+             else {
+                if(right>nums[j]) count += right- nums[j];
+                else right = nums[j];
+                j--;
+             }
+        }
+        return count ;
+    }
+}
