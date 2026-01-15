@@ -1,0 +1,58 @@
+// little bit confusing question
+// calculate the nse and pse
+// find the total contribution of each elemnt in the sum -> 3,1,4,2. >> here 1 contribute in 6 subaray accordinlgy
+// we can get it by nse and pse
+// handle the edge case when duplicate occur -> restrict one element by adjusting the one of the while loop 
+// 
+
+
+
+
+
+class Solution {
+    public int [] getPSE (int [] arr){
+        int n = arr.length;
+        Stack<Integer> st = new Stack<>();
+        int pse[] = new int [n];
+
+        for (int i=0;i<n;i++){
+
+            while (!st.isEmpty() && arr[st.peek()] >= arr[i]) st.pop();
+            if(st.isEmpty()) pse[i] =-1;
+            else pse[i] = st.peek();
+            st.push (i);
+        }
+        return pse;
+    }
+    public int [] getNSE (int [] arr ){
+        int n = arr.length;
+        int [] nse = new int [n];
+        Stack<Integer> st = new Stack<>();
+        for (int i=n-1;i>=0;i--){
+            while (!st.isEmpty() && arr[i]  <arr[st.peek()]) st.pop();
+
+            if(st.isEmpty()) nse[i]  = n;
+            else nse[i] = st.peek();
+            st.push(i);
+        }
+        return nse;
+
+    }
+    public int sumSubarrayMins(int[] arr) {
+        int n = arr.length;
+        int pse []= getPSE(arr);
+        int nse [] = getNSE(arr);
+        long count =0;
+        int MOD = 1000000007;
+
+   
+
+    for (int i =0;i<n;i++) {
+    long a = i - pse[i];
+    long b = nse[i] - i;
+    long total = (a * b % MOD) * arr[i] % MOD;
+    count = (count+total)% MOD;
+}
+return (int) count % MOD ;
+    }
+}
