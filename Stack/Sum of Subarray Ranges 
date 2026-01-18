@@ -1,0 +1,94 @@
+// same question as sum of sub array minimum
+// just get the min -> next smaller and previous smaller
+// get the max by -> next greater and previous greater
+// while revising just get the difference between how to calculate the next greater and smaller
+
+
+
+class Solution {
+    public int [] getNSE(int nums[]) {
+        int n = nums.length;
+        int nse [] = new int [n];
+        Stack<Integer> st = new Stack<>();
+
+        for (int i=n-1;i>=0;i--){
+            while (!st.isEmpty() && nums[i] <= nums[st.peek()]) st.pop();
+            if(st.isEmpty()) nse[i]  =n;
+            else nse[i] = st.peek();
+            st.push(i);
+        }
+        return nse;
+    }
+
+    public int [] getPSE(int nums[]) {
+        int n = nums.length;
+        int pse [] = new int [n];
+        Stack<Integer> st = new Stack<>();
+
+        for (int i=0;i<n;i++){
+            while (!st.isEmpty() && nums[i] < nums[st.peek()]) st.pop();
+            if(st.isEmpty()) pse[i]  =-1;
+            else pse[i] = st.peek();
+            st.push(i);
+        }
+        return pse;
+    }
+
+    public int [] getNGE(int nums[]) {
+        int n = nums.length;
+        int nge [] = new int [n];
+        Stack<Integer> st = new Stack<>();
+
+        for (int i=n-1;i>=0;i--){
+            while (!st.isEmpty() && nums[i] >= nums[st.peek()]) st.pop();
+            if(st.isEmpty()) nge[i]  =n;
+            else nge[i] = st.peek();
+            st.push(i);
+        }
+        return nge;
+    }
+    public int [] getPGE(int nums[]) {
+        int n = nums.length;
+        int pge [] = new int [n];
+        Stack<Integer> st = new Stack<>();
+
+        for (int i=0;i<n;i++){
+            while (!st.isEmpty() && nums[i] > nums[st.peek()]) st.pop();
+            if(st.isEmpty()) pge[i]  =-1;
+            else pge[i] = st.peek();
+            st.push(i);
+        }
+        return pge;
+    }
+
+    public long minele (int [] nums){
+        int n = nums.length;
+        int nse[] = getNSE(nums);
+        int pse[] = getPSE(nums);
+
+        long sum =0;
+        for (int i=0;i<n;i++){
+            long left = nse[i] -i;
+            long right = i - pse[i];
+            sum += left *right* nums[i];
+        }
+        return sum;
+    }
+
+    public long maxele(int nums[]){
+        int n = nums.length;
+        int pge []= getPGE(nums);
+        int nge []= getNGE(nums);
+        long sum = 0 ;
+        for (int i=0;i<n;i++){
+            long left  = i - pge[i];
+           long right = nge[i] - i;
+            sum += left * right* nums[i];
+        }
+        return sum;
+    }
+    
+    public long subArrayRanges(int[] nums) {
+        return maxele (nums) - minele(nums);
+    }
+}
