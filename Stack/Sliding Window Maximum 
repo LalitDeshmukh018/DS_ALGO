@@ -1,0 +1,34 @@
+in this question all we we need a data structure which can push pop add likewise from bith the endhence Deque
+//
+Steps 
+1 . Check the size of the window about to k and pop accordingly
+2 . pop untill we get bigger number
+3. add to quesu
+4. as as per the result
+
+always remember that the top element of the quesu is always larger
+// DO CORRECT AND COMPLETE DRY RUN
+
+
+
+
+
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        Deque<Integer> q = new ArrayDeque<>();
+        int ans [] = new int[n-k+1];
+        int m=0;
+        for (int i=0;i<n;i++){
+
+            while (!q.isEmpty() && q.peek() <= i-k) q.poll();
+
+            while(!q.isEmpty() && nums[q.peekLast()] < nums[i]) q.pollLast();
+
+            q.add(i);
+            if (i>=k-1) ans[m++] = nums[q.peek()];
+        }
+        return ans ;
+    }
+
+}
