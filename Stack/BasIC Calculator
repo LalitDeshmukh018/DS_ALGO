@@ -17,21 +17,21 @@ class Solution {
         for (int i=0;i<n;i++){
 
             if (Character.isDigit(ch[i])){
-                num = num * 10 + (ch[i] - '0');
+                num = num * 10 + (ch[i] - '0'); /// if the number is presnrt then make the number
             }
 
             if (ch[i] == '+'){
-                ans += sign * num;
+                ans += sign * num;  //if we got the sign it mean we compute the number previously
                 sign = 1;
                 num =0 ;
             }
             else if (ch[i] == '-'){
-                 ans += sign * num;
+                 ans += sign * num;   //if we got the sign it mean we compute the number previously
                  sign = -1;
                  num =0;
             }
             else if (ch[i] == '('){
-                st.push(ans);
+                st.push(ans);     // if we are geetign the opeing brac
                 st.push(sign);
                 ans =0 ;
                 num =0;
