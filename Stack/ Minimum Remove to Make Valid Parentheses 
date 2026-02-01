@@ -1,0 +1,39 @@
+// whenever it seems parenthesis always think for stack
+// balance the open and close 
+// thing to remember -> if "(" is there in stack and next is ")" the got balanced
+
+// intution -> we just need to remove the unnecessay para
+//              make use of the stack to find the unnecessay one 
+//              we are stroing index in the stack instead of acutal para
+//              coz we get to know which index para is not necessay 
+
+
+
+class Solution {
+    public String minRemoveToMakeValid(String s) {
+        int n = s.length();
+        Stack<Integer> st = new Stack<>();
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i=0;i<n;i++){
+            char ch = s.charAt(i);
+            if (ch == '(') st.push(i);
+            if (ch == ')'){
+                if(st.isEmpty()) set.add(i);
+                else st.pop();
+            }
+
+        }
+        StringBuilder sb = new StringBuilder();
+        
+        while (!st.isEmpty()){
+            set.add(st.pop());
+        }
+
+        for (int i=0;i<n;i++){
+            if(!set.contains(i)) sb.append(s.charAt(i));
+
+        }
+        return sb.toString();
+    }
+}
