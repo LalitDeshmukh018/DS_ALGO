@@ -1,0 +1,41 @@
+//. here in this question we use the tokenization ie 
+// we are spillting the string as per the "/" 
+// String "my name is lalit" after tokenization {"my" , "name " ,"lalit"}
+// likewise we are spilling the string as per the "/"
+// 
+
+
+
+
+
+class Solution {
+    public String simplifyPath(String path) {
+        String arr [] = path.split("/");
+        Stack<String> st = new Stack<>();
+        
+
+        for (String word : arr){
+            if(word.equals(".") || word.equals("")) continue;
+            if(word.equals("..") && !st.isEmpty()) st.pop();
+            else if (!word.equals("..")) st.push(word);
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("/");
+        int n = st.size();
+        String res [] = new String[n];
+        int i=0;
+       
+
+        while (!st.isEmpty()){
+            res[i++] = st.pop();
+        }
+
+        for (int j=n-1;j>=0;j--){
+            sb.append(res[j]);
+            if(j!=0)sb.append("/");
+        }
+        return sb.toString();
+        
+
+    }
+}
