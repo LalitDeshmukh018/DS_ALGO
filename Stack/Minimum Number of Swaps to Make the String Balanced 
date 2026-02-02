@@ -1,0 +1,35 @@
+// this is very simple question to solve
+// here we are returing +1 /2
+// coz each swap can make 2 para to solve
+// ignore the balanced one
+// count those opening bracket which are not balanced 
+// and retun count +1 /2.  as each open bracket leads to solve one pair ir oen and close
+
+
+
+class Solution {
+    public int minSwaps(String s) {
+        Stack<Character>st = new Stack<>();
+
+        for (char ch : s.toCharArray()){
+            if(ch == '[') st.push(ch);
+            else if (!st.isEmpty()) st.pop();
+        }
+        return (st.size() +1) /2;
+    }
+}
+
+
+
+class Solution {
+    public int minSwaps(String s) {
+        
+        int opencount = 0;
+
+        for (char ch : s.toCharArray()){
+            if (ch == '[') opencount ++;
+            if (opencount >0 && ch == ']') opencount --; 
+        }
+        return (opencount +1)/2;
+    }
+}
