@@ -1,0 +1,32 @@
+// this question can be solve using the stack
+// but here the optimizes one 
+// we know that for every "(" we need 2 ")" hence will add 2
+// but what if we have ( ) in this case we have one open and one close 
+
+
+
+
+class Solution {
+    public int minInsertions(String s) {
+        int right = 0;
+        int ans = 0;
+
+        for (char ch : s.toCharArray()){
+            if (ch == '('){
+                if(right %2 ==1) { // check wheteher we need one ) 
+                    right --;
+                    ans ++;  // add accorignly
+                }
+                right +=2;
+            }
+            else {
+                right --;
+                if (right <0){
+                    right +=2;
+                    ans ++;
+                }
+            }
+        }
+        return ans + right ;
+    }
+}
