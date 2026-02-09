@@ -1,0 +1,26 @@
+// difference between the lower case and upper case is 32 remember it 
+
+
+class Solution {
+    public String makeGood(String s) {
+        int n = s.length();
+
+        Stack<Character> st = new Stack<>();
+        
+        for (char ch : s.toCharArray()){
+           
+           if (!st.isEmpty() && (st.peek() - ch == 32 || st.peek() -ch == -32)){
+            st.pop();
+           }
+           else st.push(ch);
+
+        }
+        StringBuilder sb = new StringBuilder ();
+
+        while (st.size() >0) {
+            sb.append(st.pop());
+        }
+        sb.reverse();
+        return sb.toString();
+    }
+}
