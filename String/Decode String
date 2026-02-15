@@ -1,0 +1,44 @@
+// in this question just chwck what is the role of open and close bracket
+// and remember one thing if we got an open bracket it means that we are done with the prev string and the number
+// the consept of the open bracket is sams as the basic calculator wala question
+
+
+
+class Solution {
+    public String decodeString(String s) {
+        int n = s.length();
+        StringBuilder currString = new StringBuilder();
+        Stack<Integer> numst = new Stack <>();
+        Stack<StringBuilder> stringst = new Stack<>();
+
+        int num= 0;
+
+        for (char ch : s.toCharArray()){
+
+            if(Character.isDigit(ch)){
+                num = num * 10 + ch - '0';
+            }
+
+            else if (ch == '['){
+                numst.push(num);
+                stringst.push(currString);
+                num =0;
+                currString = new StringBuilder();
+            }
+
+            else if (ch ==']'){
+                int rep = numst.pop();
+                StringBuilder prev = stringst.pop();
+                StringBuilder ext = new StringBuilder();
+
+                for (int i=0;i<rep;i++){
+                    ext.append(currString);
+                }
+                currString = prev.append(ext);
+            }
+            else currString.append(ch);
+        }
+
+        return currString.toString();
+    }
+}
