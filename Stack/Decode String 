@@ -1,7 +1,7 @@
 // in this question just chwck what is the role of open and close bracket
 // and remember one thing if we got an open bracket it means that we are done with the prev string and the number
 // the consept of the open bracket is sams as the basic calculator wala question
-
+// play little bit about the string builder crazy right
 
 
 class Solution {
