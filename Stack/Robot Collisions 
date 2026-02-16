@@ -1,3 +1,20 @@
+// as this is the same question as the aesteroid collision and 
+// just one thing to make sure that sorting the index and the postion accoridingly
+// so here there are some if the cases
+ // 1 ->>   if we got the direction R then push that in the stack 
+ // 2->>    and of we got the "L" it maen that we are getting the oppsite robot which can collide to the "R"  
+//         1->> IF we got the left
+                check these conditions like 
+                !!!!  current health and the top health greater and smaller 
+                !!!!  and maintian the boolean pointer accordinlgy
+
+                handling edge case
+                ->> if LRRLL
+                    here the first L will surview likewise
+
+
+
+
 class Solution {
     public List<Integer> survivedRobotsHealths(int[] positions, int[] healths, String directions) {
         int n = positions.length;

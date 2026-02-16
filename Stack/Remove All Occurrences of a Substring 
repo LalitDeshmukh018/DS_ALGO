@@ -1,3 +1,7 @@
+
+
+
+
 class Solution {
     public boolean check(Stack<Character> st, String part){
         int n = part.length();

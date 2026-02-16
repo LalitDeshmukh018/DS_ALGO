@@ -1,3 +1,11 @@
+it the very simple one 
+just swap as per the index and 
+sometime all we need to store the index inot the stack 
+
+
+
+
+
 class Solution {
     public String swap (int i, int j, String s){
         char ch [] = s.toCharArray();
