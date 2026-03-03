@@ -1,0 +1,45 @@
+class Solution {
+    public boolean parseBoolExpr(String s) {
+        int n = s.length();
+        Stack<Character> st = new Stack<>();
+
+        for (char ch : s.toCharArray()){
+
+            if(ch == ',' || ch  == '(') continue;
+
+           else if (ch == 'f' || ch == 't' || ch =='!' || ch == '|' || ch =='&') st.push(ch);
+
+           else if (ch== ')'){
+
+            boolean hastrue = false;
+            boolean hasfalse = false;
+            
+            while (st.peek() != '!' && st.peek() != '&' && st.peek() != '|'){
+                char top = st.pop();
+                if (top == 'f') hasfalse = true;
+                if (top == 't') hastrue = true;
+            }
+
+            char op = st.pop();
+
+            if (op == '!'){
+                if(hastrue == true) st.push('f');
+                else st.push('t');
+            }
+
+            if (op == '&'){
+                if (hasfalse == true) st.push('f');
+                else st.push('t');
+            }
+
+            if (op == '|'){
+                if (hastrue == true)st.push ('t');
+                else st.push ('f');
+            }
+           }
+
+        }
+                return st.peek () == 't';
+
+    }
+}

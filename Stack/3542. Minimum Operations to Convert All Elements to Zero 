@@ -1,0 +1,29 @@
+class Solution {
+    public int minOperations(int[] nums) {
+        int n = nums.length;
+        Stack<Integer> st = new Stack<>();
+        int count = 0 ;
+
+        for (int curr : nums){
+
+             while (!st.isEmpty() && st.peek() > curr){
+                st.pop();
+            }
+            //remember the logic poping should be written first
+
+
+            if (curr == 0) continue;
+
+            if ( st.isEmpty() || curr > st.peek()){
+                count ++;
+                st.push(curr);
+            }
+
+            
+
+        }
+        return count ;
+    }
+}
+
+
