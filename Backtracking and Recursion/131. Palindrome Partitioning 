@@ -1,0 +1,39 @@
+// in the question one thing to undestant is the use of the substring in the 
+
+class Solution {
+    public boolean ispalindrome (int i , int j , String s){
+
+        while (i<=j){
+            if (s.charAt(i)!=s.charAt(j)) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    public void helper (int index, String s, List<List<String>> ans, List<String> path ){
+        int n = s.length();
+
+        if (index == n){
+            ans.add(new ArrayList<>(path));
+            return ; 
+        }
+
+        for (int i=index;i<n;i++){
+
+            if (ispalindrome (index, i,s)){
+                path.add(s.substring(index , i+1));
+                helper (i+1, s,ans , path);
+                path.remove(path.size()-1);
+            }
+        }
+    }
+    public List<List<String>> partition(String s) {
+         
+         int n = s.length();
+          List<List<String>> ans = new ArrayList<>();
+         List<String> path = new ArrayList<>();
+          helper(0, s, ans, path);
+          return ans ;
+    }
+}   
