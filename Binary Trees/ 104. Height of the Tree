@@ -1,0 +1,16 @@
+// while solving this kind of question
+// think from the bottom line 
+// bottom line in the sence go down till the leaf node and try dry running
+
+
+class Solution {
+    public int maxDepth(TreeNode root) {
+       
+        if (root==null) return 0 ;
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+
+        return 1 + Math.max (right , left);
+    }
+}
