@@ -1,0 +1,32 @@
+// if root val  == target increae the count 
+// in main fucntion 
+// we called recursion multiple time 
+ 1 -> call is for the root
+ anothe 2 are for left and right tree which can be any 
+
+
+
+class Solution {
+    public int helper (TreeNode root, long target){
+        if (root==null) return 0;
+        int count = 0;
+
+        if (root.val == (long) target) count ++;
+
+        count +=  helper (root.left, target - root.val);
+        count +=  helper (root.right, target - root.val);
+
+        return count ;
+
+    }
+    public int pathSum(TreeNode root, int target) {
+        if (root==null) return 0;
+        int count = 0 ;
+        count += helper (root, target);
+
+        count +=  pathSum (root.left,target );
+        count +=  pathSum (root.right, target);
+
+        return count;
+    }
+}
