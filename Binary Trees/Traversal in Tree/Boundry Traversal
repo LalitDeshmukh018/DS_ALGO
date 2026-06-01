@@ -1,3 +1,9 @@
+// in this will first find the left , then leaf followed by right 
+// Left side excluding the leaf nodes
+// leaf node via recurssion
+// right node excluding the leaf nodes
+
+
 class Solution {
     
     public void leftwaloo (Node root, ArrayList<Integer> ans ){
