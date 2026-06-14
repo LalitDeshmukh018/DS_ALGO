@@ -1,0 +1,39 @@
+// Using the conspet if the TREEMAP
+// jsut checking the element befor adding to the map
+// make the dry run u will get it
+
+
+class Solution {
+    
+    class pair <T,U> {
+        T first;
+        U second;
+        
+        pair (T first, U second){
+            this.first = first;
+            this.second = second;
+        }
+    }
+    public ArrayList<Integer> topView(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        Queue<pair<Node, Integer>> q = new LinkedList<>();
+        Map<Integer, Integer> mp = new TreeMap<>();
+        
+        q.add(new pair(root,0));
+        
+        while (!q.isEmpty()){
+            pair <Node,Integer> curr = q.poll();
+            Node temp = curr.first;
+            int line = curr.second;
+            
+            if (!mp.containsKey(line)) mp.put(line, temp.data);
+            if (temp.left!=null ) q.add(new pair (temp.left, line-1));
+            if (temp.right != null) q.add(new pair (temp.right, line+1));
+        }
+        for (Map.Entry <Integer,Integer> entry : mp.entrySet()){
+            ans.add(entry.getValue());
+        }
+        return ans ;
+ 
+    }
+}
